@@ -19,9 +19,9 @@
         </thead>
         <tbody>
         <tr>
-            <th scope="row">1</th>
-            <td>제목111</td>
-            <td>내용 1111</td>
+            <th scope="row" th:text="${article.id}"></th>
+            <td th:text="${article.title}"></td>
+            <td th:text="${article.content}"></td>
         </tr>
         </tbody>
     </table>
@@ -29,17 +29,6 @@
     <a href="" class="btn btn-danger">Delete</a>
     <a href="/articles">Go to Article List</a>
     <br><br>
-    <div class="card m-2">
-        <div class="card-header">
-            <span>Featured</span>
-            <a class="btn btn-sm btn-outline-primary">수정</a>
-            <a class="btn btn-sm btn-outline-primary" id="comment-delete-btn">삭제</a>
-        </div>
-        <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-    </div>
-
     <div class="card m-2">
         <div class="card-header">
             <span>Featured</span>
