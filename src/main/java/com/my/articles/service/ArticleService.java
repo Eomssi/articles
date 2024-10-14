@@ -31,4 +31,12 @@ public class ArticleService {
     public Article findArticleById(Long id) {
         return em.find(Article.class, id);
     }
+
+    //기사 삭제하기
+    public void deleteArticleById(Long id) {
+        Article article = em.find(Article.class, id); // 먼저 해당 ID의 기사를 조회
+        if (article != null) {
+            em.remove(article); // 기사가 존재하면 삭제
+        }
+    }
 }
