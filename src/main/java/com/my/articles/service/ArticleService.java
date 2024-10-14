@@ -26,4 +26,9 @@ public class ArticleService {
                 .map(article -> new ArticleDAO(article.getId(), article.getTitle(), article.getContent()))
                 .collect(Collectors.toList());
     }
+
+    //기사 자세히 보기
+    public Article findArticleById(Long id) {
+        return em.find(Article.class, id);
+    }
 }
