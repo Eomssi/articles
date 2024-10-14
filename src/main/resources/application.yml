@@ -7,6 +7,7 @@ spring:
     password: ${DB_PW}
   sql:
     init:
+      #always: 매번, embedded: 내장DB만, never: 모든 동작 안함
       mode: never
   jpa:
     defer-datasource-initialization: true
