@@ -1,6 +1,7 @@
 package com.my.articles.controller;
 
 import com.my.articles.dao.ArticleDAO;
+import com.my.articles.dto.ArticleDTO;
 import com.my.articles.entity.Article;
 import com.my.articles.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -21,8 +23,8 @@ public class ArticleController {
 
     @GetMapping("")
     public String showAllArticles(Model model) {
-        List<ArticleDAO> articles = articleService.findAllArticles();
-        model.addAttribute("articles", articles);
+        List<ArticleDTO> dtoList = articleService.getAllArticle();
+        model.addAttribute("articles", dtoList);
         return "/articles/show_all";
     }
 
@@ -34,14 +36,13 @@ public class ArticleController {
 
     @PostMapping("create")
     public String createArticle(ArticleDAO dao, Model model) {
-        articleService.insertNewArticle(dao);
         return "redirect:/articles";
     }
 
     @GetMapping("{id}")
     public String showOneArticle(@PathVariable("id") Long id, Model model) {
-        Article article = articleService.findArticleById(id);
-        model.addAttribute("article", article);
+        ArticleDTO articleDTO = articleService.getOneArticle(id);
+        model.addAttribute("article", articleDTO);
         return "/articles/show";
     }
 
@@ -56,8 +57,9 @@ public class ArticleController {
     }
 
     @GetMapping("{id}/delete")
-    public String deleteArticle(@PathVariable("id") Long id) {
-        articleService.deleteArticleById(id);
-        return "redirect:/articles";
+    public String deleteArticle(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+//        articleService.deleteArticleById(id);
+        redirectAttributes.addFlashAttribute("msg", "정상적으로 삭제되었습니다");
+        return "redirect:/";
     }
 }
