@@ -12,16 +12,26 @@
     <form id="frm" class="container" action="/articles/create" method="post">
         <div class="mb3">
             <label class="form-label">제목</label>
-            <input type="text" id="title" class="form-control" name="title">
+            <input type="text" id="title" class="form-control" name="title" th:field="${dao.title}">
         </div>
         <div class="mb-3">
             <label class="form-label">내용</label>
-            <textarea id="contents" class="form-control" row="3" name="content"></textarea>
+            <textarea id="contents" class="form-control" row="3" name="content" th:field="${dao.content}"></textarea>
         </div>
-        <input type="button" value="저장" class="btn btn-primary">
-        <input type="button" value="다시쓰기">
+        <input type="submit" value="저장" class="btn btn-primary">
+        <input type="button" value="다시쓰기" class="btn btn-primary" id="resetButton">
         <a href="/articles">Back</a>
     </form>
+
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            // 다시쓰기 버튼 눌렀을 때
+            $('#resetButton').click(function() {
+                // 기본 reset 기능 호출
+                $('#frm')[0].reset();
+            });
+        });
+    </script>
 </div>
 </body>
 

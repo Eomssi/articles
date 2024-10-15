@@ -27,13 +27,15 @@ public class ArticleController {
     }
 
     @GetMapping("new")
-    public String newArticle() {
+    public String newArticle(Model model) {
+        model.addAttribute("dao", new ArticleDAO());
         return "/articles/new";
     }
 
     @PostMapping("create")
-    public String createArticle() {
-        return "redirect:articles";
+    public String createArticle(ArticleDAO dao, Model model) {
+        articleService.insertNewArticle(dao);
+        return "redirect:/articles";
     }
 
     @GetMapping("{id}")

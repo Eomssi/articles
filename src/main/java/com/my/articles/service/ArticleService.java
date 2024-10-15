@@ -39,4 +39,11 @@ public class ArticleService {
             em.remove(article); // 기사가 존재하면 삭제
         }
     }
+
+    public void insertNewArticle(ArticleDAO dao) {
+        Article article = new Article();
+        article.setTitle(dao.getTitle());
+        article.setContent(dao.getContent());
+        em.persist(article); // 새 기사 저장
+    }
 }
