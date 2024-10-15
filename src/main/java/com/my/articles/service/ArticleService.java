@@ -37,7 +37,16 @@ public class ArticleService {
         return ArticleDTO.fromArticle(article);
     }
 
+    public void deleteArticle(Long id) {
+        dao.deleteArticle(id);
+    }
 
 
+    public void updateArticle(ArticleDTO dto) {
+        dao.updateArticle(dto);
+    }
 
+    public void insertArticle(ArticleDTO dto) {
+        dao.insertArticle(ArticleDTO.fromDTO(dto));
+    }
 }

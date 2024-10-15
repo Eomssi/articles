@@ -30,12 +30,13 @@ public class ArticleController {
 
     @GetMapping("new")
     public String newArticle(Model model) {
-        model.addAttribute("dao", new ArticleDAO());
+        model.addAttribute("dto", new ArticleDTO());
         return "/articles/new";
     }
 
     @PostMapping("create")
-    public String createArticle(ArticleDAO dao, Model model) {
+    public String createArticle(ArticleDTO dto) {
+        articleService.insertArticle(dto);
         return "redirect:/articles";
     }
 
@@ -47,19 +48,22 @@ public class ArticleController {
     }
 
     @GetMapping("{id}/update")
-    public String viewUpdateArticle() {
+    public String viewUpdateArticle(@PathVariable("id")Long id,Model model) {
+        model.addAttribute("dto", articleService.getOneArticle(id));
         return "/articles/update";
     }
 
     @PostMapping("update")
-    public String updateArticle() {
-        return "redirect:articles";
+    public String updateArticle(ArticleDTO dto) {
+        String url = "redirect:" + dto.getId();
+        articleService.updateArticle(dto);
+        return url;
     }
 
     @GetMapping("{id}/delete")
     public String deleteArticle(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-//        articleService.deleteArticleById(id);
+        articleService.deleteArticle(id);
         redirectAttributes.addFlashAttribute("msg", "정상적으로 삭제되었습니다");
-        return "redirect:/";
+        return "redirect:/articles";
     }
 }
