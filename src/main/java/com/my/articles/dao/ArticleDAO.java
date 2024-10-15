@@ -1,5 +1,6 @@
 package com.my.articles.dao;
 
+import com.my.articles.dto.ArticleDTO;
 import com.my.articles.entity.Article;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityManager;
@@ -29,4 +30,18 @@ public class ArticleDAO {
         return em.find(Article.class, id);
     }
 
+    public void deleteArticle(Long id) {
+        Article article = em.find(Article.class, id);
+        em.remove(article);
+    }
+
+    public void updateArticle(ArticleDTO dto) {
+        Article article = em.find(Article.class, dto.getId());
+        article.setTitle(dto.getTitle());
+        article.setContent(dto.getContent());
+    }
+
+    public void insertArticle(Article article) {
+        em.persist(article);
+    }
 }
