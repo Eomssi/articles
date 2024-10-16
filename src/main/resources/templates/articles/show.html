@@ -29,14 +29,14 @@
     <a th:href="@{/articles/{id}/delete(id=${article.id})}" class="btn btn-danger">Delete</a>
     <a href="/articles">Go to Article List</a>
     <br><br>
-    <div class="card m-2">
-        <div class="card-header">
-            <span>Featured</span>
-            <a class="btn btn-sm btn-outline-primary">수정</a>
-            <a class="btn btn-sm btn-outline-primary" id="comment-delete-btn">삭제</a>
+    <div class="card m-2" th:each="comment : ${article.comments}" th:object="${comment}">
+        <div class="card-header" >
+            <span th:text="*{nickname}">Featured</span>
+            <a class="btn btn-sm btn-outline-primary" th:href="@{/articles/comments/{id}/update(id=${comment.id})}">수정</a>
+            <a class="btn btn-sm btn-outline-primary" id="comment-delete-btn" th:href="@{/articles/comments/{id}/delete(id=${comment.id})}">삭제</a>
         </div>
         <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text" th:text="*{body}">With supporting text below as a natural lead-in to additional content.</p>
         </div>
     </div>
 

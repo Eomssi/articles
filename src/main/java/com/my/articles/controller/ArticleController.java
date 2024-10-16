@@ -1,8 +1,7 @@
 package com.my.articles.controller;
 
-import com.my.articles.dao.ArticleDAO;
 import com.my.articles.dto.ArticleDTO;
-import com.my.articles.entity.Article;
+import com.my.articles.dto.CommentDTO;
 import com.my.articles.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +43,7 @@ public class ArticleController {
     public String showOneArticle(@PathVariable("id") Long id, Model model) {
         ArticleDTO articleDTO = articleService.getOneArticle(id);
         model.addAttribute("article", articleDTO);
+
         return "/articles/show";
     }
 
