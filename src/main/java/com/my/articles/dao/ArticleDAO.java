@@ -23,7 +23,8 @@ public class ArticleDAO {
     // 모든 기사 목록 가져오기
     public List<Article> getAllArticle() {
         String sql = "SELECT a FROM Article a ORDER BY a.id DESC";
-        return em.createQuery(sql).getResultList();
+        List<Article> articles = em.createQuery(sql).getResultList();
+        return articles;
     }
 
     public Article getOneArticle(Long id) {
